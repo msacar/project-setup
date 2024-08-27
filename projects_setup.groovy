@@ -1,7 +1,9 @@
-import groovy.yaml.YamlSlurper
+import org.yaml.snakeyaml.Yaml
 
-def projectsConfig = new File('projects_setup.groovy').text
-def projects = new YamlSlurper().parseText(projectsConfig)
+def projectsConfig = new File('/bitnami/jenkins/projects-config/projects-config.yaml').text
+def yaml = new Yaml()
+def projects = yaml.load(projectsConfig)
+
 
 projects.projects.each { projectName, projectConfig ->
     folder(projectName) {
