@@ -1,6 +1,6 @@
 import groovy.yaml.YamlSlurper
 
-def projectsConfig = new File('/bitnami/jenkins/projects-config/projects-config.yaml').text
+def projectsConfig = new File('projects_setup.groovy').text
 def projects = new YamlSlurper().parseText(projectsConfig)
 
 projects.projects.each { projectName, projectConfig ->
