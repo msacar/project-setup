@@ -40,6 +40,11 @@ projects.projects.each { projectName, projectConfig ->
                         script(jenkinsfilePath.readToString())
                     }
                 }
+
+                // we can set environmentVariables to the pipelines from initial-projects.yaml
+//                 environmentVariables {
+//                     env('PROJECT_ALIAS', projectConfig.PROJECT_ALIAS)
+//                 }
             }
         }
     }
