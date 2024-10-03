@@ -10,22 +10,22 @@ def projects = yaml.load(projectsConfig)
 def additionalProjectsConfig = new File('/bitnami/jenkins/home/workspace/project-config/project-config.yaml').text
 def additionalYaml = new Yaml()
 def additionalProjects = additionalYaml.load(additionalProjectsConfig)
+println "The value of additionalProjects is: ${additionalProjects}"
 
 // Create a new map to hold the merged projects
 def mergedProjects = [:]
 
 // Merge the projects from the first configuration
 if (projects?.projects) {
+println "The value of projects is: ${projects}"
     mergedProjects.putAll(projects.projects)
 }
 
 // Merge the projects from the additional configuration
 if (additionalProjects?.projects) {
+println "The value of mergedProjects is: ${mergedProjects}"
     mergedProjects.putAll(additionalProjects.projects)
 }
-println "The value of additionalProjects is: ${additionalProjects}"
-println "The value of projects is: ${projects}"
-println "The value of mergedProjects is: ${mergedProjects}"
 
 
 mergedProjects.each { projectName, projectConfig ->
