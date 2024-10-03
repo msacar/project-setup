@@ -22,19 +22,18 @@ async function main() {
     // Create an object to hold the projects
     const projects: Record<string, any> = {};
 
-    // Populate the projects object
+    // Populate the projects object without extra nesting
     projectsData.filter(p => p._rio_pk !== 'root').forEach(p => {
         projects[p._rio_pk] = {
-            [p._rio_pk]: {
-                gitUrl: "git@github.com:rettersoft/rio-kubernetes-jenkinsfiles.git",
-                branch: "main",
-                jobs: {
-                    build: "user-code-template/build.Jenkinsfile",
-                    deploy: "user-code-template/deploy.Jenkinsfile"
-                }
+            gitUrl: "git@github.com:rettersoft/rio-kubernetes-jenkinsfiles.git",
+            branch: "main",
+            jobs: {
+                build: "user-code-template/build.Jenkinsfile",
+                deploy: "user-code-template/deploy.Jenkinsfile"
             }
-        }
-    })
+        };
+    });
+
     fs.writeFileSync("project-config.yaml", yaml.dump({projects}))
     console.log({yaml: yaml.dump({projects})})
     console.log(projects)
