@@ -10,6 +10,7 @@ async function main() {
     const collection = client.db("root").collection("Projects");
     const projects = await collection.find().toArray()
     console.log(projects)
+    process.exit(0)
 }
 
 main()
