@@ -40,7 +40,7 @@ pipeline {
                     nodejs(nodeJSInstallationName: 'node22.8.x') {
                         withEnv(["MONGO_CONNECTION_STRING=${decodedValue}"]) {
                             sh """
-                                ts-node ./projects.ts
+                                ./node_modules/.bin/ts-node ./projects.ts
                             """
                         }
                     }
