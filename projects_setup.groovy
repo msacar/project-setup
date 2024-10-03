@@ -11,7 +11,18 @@ def additionalProjectsConfig = new File('/bitnami/jenkins/home/workspace/project
 def additionalYaml = new Yaml()
 def additionalProjects = additionalYaml.load(additionalProjectsConfig)
 
-def mergedProjects = projects.projects + additionalProjects.projects
+// Create a new map to hold the merged projects
+def mergedProjects = [:]
+
+// Merge the projects from the first configuration
+if (projectsConfig?.projects) {
+    mergedProjects.putAll(projectsConfig.projects)
+}
+
+// Merge the projects from the additional configuration
+if (additionalProjectsConfig?.projects) {
+    mergedProjects.putAll(additionalProjectsConfig.projects)
+}
 
 mergedProjects.each { projectName, projectConfig ->
     folder(projectName) {
