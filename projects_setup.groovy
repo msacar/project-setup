@@ -16,12 +16,12 @@ def mergedProjects = [:]
 
 // Merge the projects from the first configuration
 if (projects?.projects) {
-    mergedProjects.putAll(projectsConfig.projects)
+    mergedProjects.putAll(projects.projects)
 }
 
 // Merge the projects from the additional configuration
 if (additionalProjects?.projects) {
-    mergedProjects.putAll(additionalProjectsConfig.projects)
+    mergedProjects.putAll(additionalProjects.projects)
 }
 
 mergedProjects.each { projectName, projectConfig ->
