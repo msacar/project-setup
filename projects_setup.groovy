@@ -15,12 +15,12 @@ def additionalProjects = additionalYaml.load(additionalProjectsConfig)
 def mergedProjects = [:]
 
 // Merge the projects from the first configuration
-if (projectsConfig?.projects) {
+if (projects?.projects) {
     mergedProjects.putAll(projectsConfig.projects)
 }
 
 // Merge the projects from the additional configuration
-if (additionalProjectsConfig?.projects) {
+if (additionalProjects?.projects) {
     mergedProjects.putAll(additionalProjectsConfig.projects)
 }
 
