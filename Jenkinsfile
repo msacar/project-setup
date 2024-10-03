@@ -33,16 +33,14 @@ pipeline {
         stage('Run script') {
             steps {
                 script {
-                    dir('deployer') {
-                        def secretValue = sh(script: "kubectl get secret mongo-secrets -o jsonpath='{.data.MONGO_CONNECTION_STRING}'", returnStdout: true).trim()
-                        def decodedValue = sh(script: "echo ${secretValue} | base64 --decode", returnStdout: true).trim()
+                    def secretValue = sh(script: "kubectl get secret mongo-secrets -o jsonpath='{.data.MONGO_CONNECTION_STRING}'", returnStdout: true).trim()
+                    def decodedValue = sh(script: "echo ${secretValue} | base64 --decode", returnStdout: true).trim()
 
-                        nodejs(nodeJSInstallationName: 'node22.8.x') {
-                            withEnv(["MONGO_CONNECTION_STRING=${decodedValue}"]) {
-                            sh """
-                                ts-node ./projects.ts
-                            """
-                            }
+                    nodejs(nodeJSInstallationName: 'node22.8.x') {
+                        withEnv(["MONGO_CONNECTION_STRING=${decodedValue}"]) {
+                        sh """
+                            ts-node ./projects.ts
+                        """
                         }
                     }
                 }
