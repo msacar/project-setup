@@ -7,6 +7,14 @@ def projectsConfig = new File('/bitnami/jenkins/projects-config/projects-config.
 def yaml = new Yaml()
 def projects = yaml.load(projectsConfig)
 
+/**
+*
+* i need to connect mongodb in here
+* i think i can do it with running js script here
+* then i need to get results js script
+* then i need to convert result to yaml
+* then i need to merge with projects variable defined in line:8 def projects = yaml.load(projectsConfig)
+**/
 
 projects.projects.each { projectName, projectConfig ->
     folder(projectName) {
@@ -30,15 +38,12 @@ projects.projects.each { projectName, projectConfig ->
                     }
                 } else if (projectConfig.directUrl) {
                     cps {
-                        def tempDir = new FilePath(new File("${Jenkins.instance.rootDir}/workspace/${projectName}-${jobName}-temp"))
-                        tempDir.deleteRecursive()
-                        tempDir.mkdirs()
-
-                        downloadAndExtractZip(projectConfig.directUrl, tempDir.remote)
-
-                        def jenkinsfilePath = new FilePath(tempDir, jenkinsfile)
-                        script(jenkinsfilePath.readToString())
+                        // NOT IMPLEMENTED
                     }
+                }
+                else {
+                    //default jenkinsfile
+
                 }
 
                 // we can set environmentVariables to the pipelines from initial-projects.yaml
