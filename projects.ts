@@ -7,11 +7,14 @@ console.log(MONGO_CONNECTION_STRING)
 const client = new MongoClient(MONGO_CONNECTION_STRING);
 
 client.connect().then(() => console.log('Connected!')).catch(console.error);
+interface Project {
+    _rio_pk: string;
+}
 
 async function main() {
     const collection = client.db("root").collection("Project");
     const projectsData = await collection.find().toArray()
-    const projects =  projectsData.map(p => {
+    const projects =  projectsData.map((p: Project) => {
         return {
             [p._rio_pk]: {
                 gitUrl: "git@github.com:rettersoft/rio-kubernetes-jenkinsfiles.git",
