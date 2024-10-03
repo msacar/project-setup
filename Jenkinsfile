@@ -35,12 +35,13 @@ pipeline {
                 script {
                     def secretValue = sh(script: "kubectl get secret mongo-secrets -o jsonpath='{.data.MONGO_CONNECTION_STRING}'", returnStdout: true).trim()
                     def decodedValue = sh(script: "echo ${secretValue} | base64 --decode", returnStdout: true).trim()
+                    sh "echo ${decodedValue}"
 
                     nodejs(nodeJSInstallationName: 'node22.8.x') {
                         withEnv(["MONGO_CONNECTION_STRING=${decodedValue}"]) {
-                        sh """
-                            ts-node ./projects.ts
-                        """
+                            sh """
+                                ts-node ./projects.ts
+                            """
                         }
                     }
                 }
