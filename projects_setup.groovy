@@ -9,7 +9,7 @@ def projects = yaml.load(projectsConfig)
 
 def additionalProjectsConfig = new File('/bitnami/jenkins/home/workspace/project-config/project-config.yaml').text
 def additionalYaml = new Yaml()
-def additionalProjects = additionalYaml.load(projectsConfig)
+def additionalProjects = additionalYaml.load(additionalProjectsConfig)
 
 def mergedProjects = projects.projects + additionalProjects.projects
 
