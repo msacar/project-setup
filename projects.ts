@@ -19,8 +19,12 @@ interface Project extends Document{
 async function main() {
     const collection = client.db("root").collection<Project>("Project");
     const projectsData = await collection.find().toArray()
-    const projects = projectsData.filter(p => p._rio_pk != 'root').map(p => {
-        return {
+    // Create an object to hold the projects
+    const projects: Record<string, any> = {};
+
+    // Populate the projects object
+    projectsData.filter(p => p._rio_pk !== 'root').forEach(p => {
+        projects[p._rio_pk] = {
             [p._rio_pk]: {
                 gitUrl: "git@github.com:rettersoft/rio-kubernetes-jenkinsfiles.git",
                 branch: "main",
