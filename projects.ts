@@ -8,7 +8,7 @@ const client = new MongoClient(MONGO_CONNECTION_STRING);
 client.connect().then(() => console.log('Connected!')).catch(console.error);
 async function main() {
     const collection = client.db("root").collection("Projects");
-    const projects = await collection.find()
+    const projects = await collection.find().toArray()
     console.log(projects)
 }
 
