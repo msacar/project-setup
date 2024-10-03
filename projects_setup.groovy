@@ -7,8 +7,13 @@ def projectsConfig = new File('/bitnami/jenkins/projects-config/projects-config.
 def yaml = new Yaml()
 def projects = yaml.load(projectsConfig)
 
+def additionalProjectsConfig = new File('/bitnami/jenkins/home/workspace/project-config/project-config.yaml').text
+def additionalYaml = new Yaml()
+def additionalProjects = additionalYaml.load(projectsConfig)
 
-projects.projects.each { projectName, projectConfig ->
+def mergedProjects = projects.projects + additionalProjects.projects
+
+mergedProjects.each { projectName, projectConfig ->
     folder(projectName) {
         description("Folder for ${projectName}")
     }
