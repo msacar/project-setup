@@ -23,12 +23,10 @@ pipeline {
 
          stage('Install Deployer Dependencies') {
              steps {
-                 dir('deployer') {
-                     sh 'ls -all -h'
-                     sh 'npm -v'
-                     sh 'pnpm -v'
-                     sh 'pnpm install --verbose --no-frozen-lockfile'
-                 }
+                 sh 'ls -all -h'
+                 sh 'npm -v'
+                 sh 'pnpm -v'
+                 sh 'pnpm install --verbose --no-frozen-lockfile'
              }
          }
 
