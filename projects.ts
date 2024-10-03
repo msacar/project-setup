@@ -1,21 +1,21 @@
-const fs = require('fs')
-const yaml = require('js-yaml')
-const MongoClient = require('mongodb').MongoClient;
-const {MONGO_CONNECTION_STRING} = process.env;
+import * as fs from 'fs';
+import yaml from 'js-yaml';
+import { MongoClient, Document } from 'mongodb';
+const { MONGO_CONNECTION_STRING } = process.env;
 
 console.log(MONGO_CONNECTION_STRING)
 const client = new MongoClient(MONGO_CONNECTION_STRING);
 
 client.connect().then(() => console.log('Connected!')).catch(console.error);
 
-interface Project {
+interface Project extends Document{
     _rio_pk: string;
 }
 
 async function main() {
-    const collection = client.db("root").collection("Project");
+    const collection = client.db("root").collection<Project>("Project");
     const projectsData = await collection.find().toArray()
-    const projects = projectsData.filter((p: Project) => p._rio_pk != 'root').map((p: Project) => {
+    const projects = projectsData.filter(p => p._rio_pk != 'root').map(p => {
         return {
             [p._rio_pk]: {
                 gitUrl: "git@github.com:rettersoft/rio-kubernetes-jenkinsfiles.git",
