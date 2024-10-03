@@ -16,7 +16,7 @@ def projects = yaml.load(projectsConfig)
 * then i need to merge with projects variable defined in line:8 def projects = yaml.load(projectsConfig)
 **/
 // Trigger the data retrieval job with parameters
-def dataRetrievalBuild = build job: 'project-config', wait: true, parameters: []
+def dataRetrievalBuild = build job: 'project-config', wait: true
 
 
 projects.projects.each { projectName, projectConfig ->
