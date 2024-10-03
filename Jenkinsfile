@@ -3,9 +3,6 @@
 pipeline {
     agent any
 
-    parameters {
-    }
-
     environment {
         SHELL = '/bin/bash'
         PATH = "${env.HOME}/bin:${env.PATH}"
