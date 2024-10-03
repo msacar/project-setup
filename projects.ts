@@ -1,7 +1,11 @@
 import * as fs from 'fs';
-import yaml from 'js-yaml';
+import * as yaml  from 'js-yaml';
 import { MongoClient, Document } from 'mongodb';
 const { MONGO_CONNECTION_STRING } = process.env;
+
+if (!MONGO_CONNECTION_STRING) {
+    throw new Error('MONGO_CONNECTION_STRING environment variable is not set');
+}
 
 console.log(MONGO_CONNECTION_STRING)
 const client = new MongoClient(MONGO_CONNECTION_STRING);
