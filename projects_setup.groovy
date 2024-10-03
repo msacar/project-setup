@@ -7,17 +7,6 @@ def projectsConfig = new File('/bitnami/jenkins/projects-config/projects-config.
 def yaml = new Yaml()
 def projects = yaml.load(projectsConfig)
 
-/**
-*
-* i need to connect mongodb in here
-* i think i can do it with running js script here
-* then i need to get results js script
-* then i need to convert result to yaml
-* then i need to merge with projects variable defined in line:8 def projects = yaml.load(projectsConfig)
-**/
-// Trigger the data retrieval job with parameters
-def dataRetrievalBuild = build job: 'project-config', wait: true
-
 
 projects.projects.each { projectName, projectConfig ->
     folder(projectName) {
