@@ -1,9 +1,9 @@
 const yaml = require('js-yaml')
 const MongoClient = require('mongodb').MongoClient;
-const { MONGO_CONNECTION_URI } = process.env;
+const { MONGO_CONNECTION_STRING } = process.env;
 
-console.log(MONGO_CONNECTION_URI)
-const client = new MongoClient(MONGO_CONNECTION_URI);
+console.log(MONGO_CONNECTION_STRING)
+const client = new MongoClient(MONGO_CONNECTION_STRING);
 
 client.connect().then(() => console.log('Connected!')).catch(console.error);
 async function main() {
