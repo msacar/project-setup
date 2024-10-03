@@ -23,6 +23,10 @@ if (projects?.projects) {
 if (additionalProjects?.projects) {
     mergedProjects.putAll(additionalProjects.projects)
 }
+println "The value of additionalProjects is: ${additionalProjects}"
+println "The value of projects is: ${projects}"
+println "The value of mergedProjects is: ${mergedProjects}"
+
 
 mergedProjects.each { projectName, projectConfig ->
     folder(projectName) {
